@@ -2,7 +2,7 @@
 
 export const LLM_CONFIG = {
   /* Ollama (local) config:
-   */
+
   ollama: true,
   url: 'http://127.0.0.1:11434',
   chatModel: 'llama3' as const,
@@ -12,16 +12,17 @@ export const LLM_CONFIG = {
   apiKey: () => undefined,
   // embeddingModel: 'llama3',
   // embeddingDimension: 4096,
+     */
 
-  /* Together.ai config:
+  /* Together.ai config:   */
   ollama: false,
   url: 'https://api.together.xyz',
   chatModel: 'meta-llama/Llama-3-8b-chat-hf',
   embeddingModel: 'togethercomputer/m2-bert-80M-8k-retrieval',
   embeddingDimension: 768,
   stopWords: ['<|eot_id|>'],
-  apiKey: () => process.env.TOGETHER_API_KEY ?? process.env.LLM_API_KEY,
-   */
+  apiKey: () => process.env.TOGETHER_API_KEY ?? process.env.LLM_API_KEY ??"4942559f0f416a1d4990e0c17df6c7455b9422512c225fc10e0d3cbe4c5e1bca",
+
 
   /* OpenAI config:
   ollama: false,
@@ -53,8 +54,8 @@ function apiUrl(path: string) {
 const AuthHeaders = (): Record<string, string> =>
   LLM_CONFIG.apiKey()
     ? {
-        Authorization: 'Bearer ' + LLM_CONFIG.apiKey(),
-      }
+      Authorization: 'Bearer ' + LLM_CONFIG.apiKey(),
+    }
     : {};
 
 // Overload for non-streaming
@@ -229,8 +230,8 @@ export function assertApiKey() {
   if (!LLM_CONFIG.ollama && !LLM_CONFIG.apiKey()) {
     throw new Error(
       '\n  Missing LLM_API_KEY in environment variables.\n\n' +
-        (LLM_CONFIG.ollama ? 'just' : 'npx') +
-        " convex env set LLM_API_KEY 'your-key'",
+      (LLM_CONFIG.ollama ? 'just' : 'npx') +
+      " convex env set LLM_API_KEY 'your-key'",
     );
   }
 }
@@ -485,10 +486,10 @@ export interface CreateChatCompletionRequest {
     // Specifies a tool the model should use. Use to force the model to call
     // a specific function.
     | {
-        // The type of the tool. Currently, only function is supported.
-        type: 'function';
-        function: { name: string };
-      };
+    // The type of the tool. Currently, only function is supported.
+    type: 'function';
+    function: { name: string };
+  };
   // Replaced by "tools"
   // functions?: {
   //   /**
