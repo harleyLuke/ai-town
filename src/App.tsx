@@ -79,7 +79,7 @@ export default function Home() {
 
         <div className="max-w-xs md:max-w-xl lg:max-w-none mx-auto my-4 text-center text-base sm:text-xl md:text-2xl text-white leading-tight shadow-solid">
           SSSONIC and his friends' Town.
-          CA:DhHodR1zcHcvNRXvt6VxFc8fZ1f6uTLAFSk44RWapump
+          CA:FFZHwUydAaw8r3Ajjanupp36Hv7div7r6mJNxxakpump
           {/* <Unauthenticated>
             <div className="my-1.5 sm:my-0" />
             Log in to join the town
